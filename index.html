@@ -14,7 +14,7 @@
             <span class="nav-icon">
                  <i class="fas fa-bars" aria-hidden="true"></i>
             </span>
-            <img src="./images/logo.svg" alt="store logo"/>
+            <img src="./images/logo.png" class="logo" alt="store logo"/>
             <div class="cart-btn">
                 <span class="nav-icon">
                     <i class="fas fa-cart-plus"></i>
@@ -24,7 +24,63 @@
         </div>
     </nav>
     <!--Navbar -->
-    
-    <script src="app.js"></script>
+    <!-- main page -->
+    <header class="main">
+        <div class="banner">
+            <h1 class="banner-title">Apartment Shop</h1>
+            <button class="banner-btn">shop now</button>
+        </div>
+    </header>
+    <!-- end of main page -->
+    <!-- products -->
+        <section class="products">
+            <div class="section-title">
+                <h2>Products for apartments</h2>
+            </div>
+            <div class="products-center">
+                <!-- single product -->
+                <article class="product">
+                    <div class="img-container">
+                        <img src="/images/product-1.jpeg" alt="product" class="product-img">
+                        <button class="bag-btn" data-id="1">
+                             <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+                             add to bag
+                        </button>
+                    </div>
+                    <h3>queen bed</h3>
+                    <h4>$16.00</h4>
+                </article>
+                <!-- single product -->
+            </div>
+        </section>
+    <!-- end of products -->
+        <!-- cart -->
+        <div class="cart-overlay">
+        <div class="cart">
+            <span class="close-cart">
+                <i class="fas fa-window-close"></i>
+            </span>
+            <h2>your cart</h2>
+            <div class="cart-content">
+                <!-- cart item -->
+                 <div class="cart-item">
+                     <img src="./images/product-1.jpeg" alt="product">
+                    <div>
+                         <h4>Queen Bed</h4>
+                         <h5>$9.00</h5>
+                         <span class="remove-item">remove</span>
+                     </div>
+                     <div>
+                         <i class="fas fa-chevron-up"></i>
+                         <p class="item-amount">1</p>
+                        <i class="fas fa-chevron-down"></i>
+                     </div>
+                </div>
+                <!-- end of cart item -->
+            </div>
+        </div>
+        </div>
+        <!-- end of cart -->
+    <script src="app.js"></script>  
 </body>
 </html>
