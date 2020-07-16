@@ -60,7 +60,7 @@ class ProductsUI{
     }
      getBagButtons(){
          const buttons = [...document.querySelectorAll('.bag-btn')];
-         console.log(buttons);
+         
          buttons.forEach(button =>{
              let id = button.dataset.id;
              let inCart = cart.find(item => item.id === id);
@@ -82,8 +82,9 @@ class ProductsUI{
                      //set cart values 
                      this.setCartValue(cart);
                      //add cart item and display it
+                     this.addCartItem(cartItem);
                      //show the cart
-
+                     this.showCart();
                  })
              }
          });  
@@ -97,8 +98,46 @@ class ProductsUI{
         });
         cartTotal.innerText = parseFloat(tempTotal.toFixed(2));
         cartItems.innerText = itemsTotal;
-        console.log(cartTotal,cartItems);
+       
     };
+    addCartItem(item){
+    const div = document.createElement('div');
+    div.classList.add('cart-item');
+    div.innerHTML = `
+        <img src=${item.image} alt="product">
+            <div>
+                <h4>${item.title}</h4>
+                <h5>$${item.price}</h5>
+                <span class="remove-item" data-id=${item.id}>remove</span>
+            </div>
+            <div>  
+                <i class="fas fa-chevron-up" data-id=${item.id}></i>
+                <p class="item-amount">${item.amount}</p>
+                <i class="fas fa-chevron-down" data-id=${item.id}></i>
+            </div>`;
+        cartContent.appendChild(div);
+    }
+    showCart(){
+        cartOverlay.classList.add('transparentBackground');
+        cartDOM.classList.add('showCart');
+    }
+    setupApp(){
+        cart = LocalStorage.getCart();
+        this.setCartValue(cart);
+        this.fillCart(cart);
+        //click the cart button 
+        cartBtn.addEventListener('click', this.showCart);
+        //closing the cart button
+        closeCart.addEventListener('click', this.hideCart);
+    }
+    fillCart(cart){
+        cart.forEach(item => this.addCartItem(item));
+    }
+    hideCart() {
+        cartOverlay.classList.remove('transparentBackground');
+        cartDOM.classList.remove('showCart');
+    }
+    
 }
 //storage
 class LocalStorage{
@@ -114,12 +153,17 @@ class LocalStorage{
     static saveCart(cart){
         localStorage.setItem('cart', JSON.stringify(cart));
     }
+    static getCart(){
+        //check if the item exists
+        return localStorage.getItem('cart') ?JSON.parse(localStorage.getItem('cart')):[] 
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () =>{
     const ui = new ProductsUI();
     const products = new Products();
-
+    //setup application
+    ui.setupApp();
     //get all products
     products.getProducts().then(products => {
          ui.displayProducts(products);

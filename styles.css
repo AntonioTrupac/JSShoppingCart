@@ -209,7 +209,7 @@ ZA HTML DOKUMENT <button onclick="myFunction()">Toggle dark mode</button>
 .showCart {
   transform: translateX(0);
 }
-.transparentBcg {
+.transparentBackground {
   visibility: visible;
 }
 @media screen and (min-width: 768px) {
